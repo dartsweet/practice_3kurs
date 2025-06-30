@@ -1,31 +1,25 @@
-import Staya.Animal;
-import Staya.Cat;
-import Staya.Dog;
-import Staya.Tiger;
-
-public class Main
-{
-    public static void main(String[] args)
-    {
-        Animal[] animals = {
-                new Dog("Бобик"),
-                new Cat("Мурзик"),
-                new Tiger("Полосатый"),
-                new Dog("Тузик"),
-                new Cat("Васька")
+public class Main {
+    public static void main(String[] args) {
+        Participant[] participants = {
+                new Human("Иван", 1000, 2),
+                new Cat("Барсик", 500, 3),
+                new Robot("CP-U", 2000, 1)
         };
 
-        for (Animal animal : animals) {
-            animal.run(300);
-            animal.run(999);
-            animal.swim(20);
-            animal.swim(-5);
-            System.out.println();
-        }
+        Obstacle[] obstacles = {
+                new Treadmill(800),
+                new Wall(1),
+                new Treadmill(1200),
+                new Wall(1)
+        };
 
-        System.out.println("Всего животных: " + Animal.getAnimalCount());
-        System.out.println("Собак: " + Dog.getDogCount());
-        System.out.println("Котов: " + Cat.getCatCount());
-        System.out.println("Тигров: " + Tiger.getTigerCount());
+        for (Participant participant : participants) {
+            System.out.println("\nУчастник " + participant.getName() + " начинает:");
+            for (Obstacle obstacle : obstacles) {
+                if (participant.isActive()) {
+                    obstacle.overcome(participant);
+                }
+            }
+        }
     }
 }
